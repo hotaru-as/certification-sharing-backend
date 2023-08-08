@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'https://main--fancy-dragon-01f068.netlify.app/'
+    'https://main--fancy-dragon-01f068.netlify.app'
 ]
 
 SIMPLE_JWT = {
