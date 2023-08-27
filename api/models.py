@@ -2,10 +2,13 @@ from django.db import models
 from accounts.models import CustomUser
 
 class UserProfile(models.Model):
+    def create_save_path(instance, filename):
+        return f'{instance.user_id}/{filename}'
+
     user_id = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     introduction = models.TextField(verbose_name='自己紹介', max_length=1000, null=True, blank=True)
     birth_day = models.DateField(verbose_name='誕生日', null=True, blank=True)
-    icon_img = models.ImageField(verbose_name='アイコン画像', null=True, blank=True)
+    icon_img = models.ImageField(verbose_name='アイコン画像', upload_to=create_save_path, null=True, blank=True)
 
 class Follower(models.Model):
     follow_user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='follow_user')

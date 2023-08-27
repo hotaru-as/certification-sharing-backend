@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'api.apps.ApiConfig',
     'corsheaders',
-    'djoser'
+    'djoser',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -171,3 +172,22 @@ MEDIA_ROOT = str(BASE_DIR / 'mediafiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+STORAGES = {
+    "default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"},
+    "staticfiles": {"BACKEND": "storages.backends.s3boto3.S3StaticStorage"}
+}
+
+# アクセスキーID
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+# シークレットアクセスキー
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+# バケット名
+AWS_STORAGE_BUCKET_NAME = 'study-sharing'
+# 保存先URL
+AWS_LOCATION = 'static'
+MEDIA_URL = 'https://%s.s3.ap-northeast-3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME

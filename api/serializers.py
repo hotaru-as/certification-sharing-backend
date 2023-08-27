@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import UserProfile, Follower, RecordCategory, Certification, CertificationRecord,  TargetStatus, TargetRecord, StudyRecord
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    icon_img = serializers.ImageField(use_url=False)
     class Meta:
         model = UserProfile
         fields = ('user_id', 'introduction', 'birth_day', 'icon_img')
