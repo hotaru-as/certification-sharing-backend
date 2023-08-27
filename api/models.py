@@ -3,7 +3,7 @@ from accounts.models import CustomUser
 
 class UserProfile(models.Model):
     def create_save_path(instance, filename):
-        return f'{instance.user_id}/{filename}'
+        return f'users/{instance.user_id}/{filename}'
 
     user_id = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     introduction = models.TextField(verbose_name='自己紹介', max_length=1000, null=True, blank=True)
